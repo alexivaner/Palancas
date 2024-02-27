@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
+    <title>Letters for <%= recipientName %></title>
+</head>
+<body>
+    <h1>Letters for <%= recipientName %></h1>
+    
+    <% if (letters.length === 0) { %>
+        <p>No letters yet. Be the first to write!</p>
+    <% } else { %>
+        <ul>
+            <% letters.forEach(letter => { %>
+                <li><strong><%= letter.senderName %></strong>: <%= letter.letter %></li>
+            <% }); %>
+        </ul>        
+    <% } %>
+    
+</body>
+</html>

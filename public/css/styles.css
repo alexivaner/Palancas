@@ -1,0 +1,124 @@
+/* Reset some default styles */
+body, h1, p {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif; /* Change font to Roboto */
+    background-color: #f9f9f9;
+    text-align: center;
+    line-height: 1.6; /* Improved line height for better readability */
+}
+
+h1 {
+    color: #2c3e50; /* Darker text color for better contrast */
+    font-size: 2.5em; /* Increase heading font size */
+}
+
+form {
+    max-width: 700px;
+    margin: 30px auto; /* Increase margin for better spacing */
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin: 20px 0 12px;
+    color: #555;
+    font-weight: bold;
+    font-size: 1.1em; /* Increase font size for labels */
+}
+
+input,
+textarea {
+    width: calc(100% - 24px); /* Adjusted width for better spacing */
+    padding: 14px;
+    margin-bottom: 20px; /* Increased margin for better spacing */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    font-size: 1em; /* Normalized font size for input fields */
+}
+
+input:focus,
+textarea:focus {
+    border-color: #27ae60; /* Adjusted border color on focus */
+}
+
+button {
+    background-color: #27ae60;
+    color: #fff;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1.1em; /* Increased font size for buttons */
+}
+
+button:hover {
+    background-color: #219d55; /* Darker color on hover */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    border: 1px solid #ddd;
+    margin: 20px auto; /* Increased margin for better spacing */
+    padding: 18px;
+    border-radius: 10px;
+    position: relative;
+    width: 80%;
+}
+
+li:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 100%;
+    border-radius: 10px 0 0 10px;
+}
+
+/* Additional pastel colors for sticky notes */
+li:nth-child(odd) {
+    background-color: #f0f8f8;
+    border-color: #b8d8d8;
+}
+
+li:nth-child(odd):before {
+    background-color: #f0f8f8;
+}
+
+li:nth-child(3) {
+    background-color: #f8d8f8;
+    border-color: #e0b8e0;
+}
+
+li:nth-child(3):before {
+    background-color: #f8d8f8;
+}
+
+li:nth-child(4) {
+    background-color: #f8f5d8;
+    border-color: #e0d8b8;
+}
+
+li:nth-child(4):before {
+    background-color: #f8f5d8;
+}
+
+p {
+    color: #27ae60;
+    font-size: 1.1em; /* Increase font size for paragraphs */
+    font-style: italic; /* Apply italic style to paragraphs */
+}

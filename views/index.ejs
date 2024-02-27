@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>KITA Palanca Website</title>
+</head>
+<body>
+    <h1>Welcome to the Palancas KITA!</h1>
+
+    <% if (submissionConfirmed) { %>
+        <p>Thank you udah surat Palancasnya, God bless!</p>
+    <% } else { %>
+        <form action="/submit-letter" method="post">
+            <label for="senderName">Nama kamu:</label>
+            <input type="text" id="senderName" name="senderName" required>
+            
+            <label for="recipientName">Nama Penerima:</label>
+            <input type="text" id="recipientName" name="recipientName" <% if (!isEditable) { %> readonly <% } %> value="<%= dynamicRecipientName %>" required>
+            
+            <label for="letter">Tulis Suratmu disini:</label>
+            <textarea id="letter" name="letter" rows="4" required></textarea>
+            
+            <button type="submit">Submit Letter</button>
+        </form>
+    <% } %>
+</body>
+</html>
