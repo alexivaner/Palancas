@@ -9,6 +9,8 @@ const passwordsFilePath = path.join(__dirname, 'passwords.json');
 // Load passwords from the JSON file on server start
 let passwords = loadPasswords();
 
+app.use(express.static('public'));
+
 function loadPasswords() {
     try {
         const data = fs.readFileSync(passwordsFilePath, 'utf8');
@@ -105,7 +107,7 @@ app.get('/letters/:recipientName', (req, res) => {
         }
     } else {
         // No password protection for this recipient, render the letters
-        res.render('letters', { recipientName, letters: recipientLetters });
+        res.render('password-error');
     }
 });
 

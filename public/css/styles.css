@@ -4,6 +4,13 @@ body, h1, p {
     padding: 0;
 }
 
+/* public/css/styles.css */
+header img {
+    width: 100px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
+
 body {
     font-family: 'Roboto', sans-serif; /* Change font to Roboto */
     background-color: #f9f9f9;
