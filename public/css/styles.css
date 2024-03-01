@@ -129,3 +129,29 @@ p {
     font-size: 1.1em; /* Increase font size for paragraphs */
     font-style: italic; /* Apply italic style to paragraphs */
 }
+
+/* Add these styles at the end of your existing styles.css file */
+
+/* Style for name list */
+body a {
+    display: inline-block;
+    margin: 5px;
+    padding: 8px 15px;
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+body a:hover {
+    background-color: #2980b9; /* Darker color on hover */
+}
+
+.name-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 700px;
+    margin: 30px auto;
+}

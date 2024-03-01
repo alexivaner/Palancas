@@ -12,7 +12,14 @@
     <h2>Rekoleksi Prapaskah 2024</h2>
 
     <% if (submissionConfirmed) { %>
-        <p>Thank you udah surat Palancasnya, God bless!</p>
+        <p>Thank you udah mengisi surat Palancanya, God bless!</p>
+        <h2>Yok isi punya teman lain!</h2>
+
+        <div class="name-list">
+            <% passwordList.forEach(name => { %>
+                <a href="/<%= name %>"><%= name %></a><br>
+            <% }) %>
+        </div>
     <% } else { %>
         <form action="/submit-letter" method="post">
             <label for="senderName">Nama kamu:</label>
@@ -26,6 +33,13 @@
             
             <button type="submit">Submit Letter</button>
         </form>
+        <h2>Yok isi punya teman lain!</h2>
+        <div class="name-list">
+            <% passwordList.forEach(name => { %>
+                <a href="/<%= name %>"><%= name %></a><br>
+            <% }) %>
+        </div>
+   
     <% } %>
 </body>
 </html>

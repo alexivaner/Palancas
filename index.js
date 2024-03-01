@@ -70,9 +70,10 @@ function saveLetters() {
 app.get('/', (req, res) => {
     const dynamicRecipientName = '';
     const isEditable = true;
-    res.render('index', { submissionConfirmed: false, dynamicRecipientName, isEditable });
-});
 
+    // Pass the password list to the template
+    res.render('index', { submissionConfirmed: false, dynamicRecipientName, isEditable, passwordList: Object.keys(passwords) });
+});
 
 app.post('/submit-letter', (req, res) => {
     const senderName = req.body.senderName;
@@ -86,7 +87,8 @@ app.post('/submit-letter', (req, res) => {
     letters[recipientName].push({ senderName, letter });
     saveLetters();
 
-    res.render('index', { submissionConfirmed: true });
+    // Pass the password list to the template
+    res.render('index', { submissionConfirmed: true, passwordList: Object.keys(passwords) });
 });
 
 app.get('/letters/:recipientName', (req, res) => {
@@ -107,20 +109,18 @@ app.get('/letters/:recipientName', (req, res) => {
         }
     } else {
         // No password protection for this recipient, render the letters
-        res.render('password-error');
+        res.render('letters', { recipientName, letters: recipientLetters });
     }
 });
-
 
 app.get('/:recipientName?', (req, res) => {
     const recipientName = req.params.recipientName || '';
     const dynamicRecipientName = recipientName;
     const isEditable = req.path === '/' || !recipientName;
 
-    res.render('index', { submissionConfirmed: false, dynamicRecipientName, isEditable });
+    // Pass the password list to the template
+    res.render('index', { submissionConfirmed: false, dynamicRecipientName, isEditable, passwordList: Object.keys(passwords) });
 });
-
-
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
