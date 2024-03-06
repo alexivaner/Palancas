@@ -6,6 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
     <title>KITA Palanca Website</title>
+    <script>
+            // Check for submitted names in local storage
+            var submittedNames = JSON.parse(localStorage.getItem('submittedNames')) || [];
+
+            // Function to fill recipient and scroll
+            function fillRecipientAndScroll(name) {
+                // Fill recipientName input with the selected name
+                document.getElementById('recipientName').value = name;
+
+                // Make recipientName input uneditable
+                document.getElementById('recipientName').readOnly = true;
+
+                // Add the submitted name to the list and update local storage
+                submittedNames.push(name);
+                localStorage.setItem('submittedNames', JSON.stringify(submittedNames));
+
+                // Scroll to the form section
+                document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // Check and update the color of submitted names
+            submittedNames.forEach(function(name) {
+                var linkElement = document.querySelector('a[data-name="' + name + '"]');
+                if (linkElement) {
+                    linkElement.classList.add('submitted');
+                }
+            });
+    </script>
+    <style>
+        .name-list a.submitted {
+            background-color: green; /* Change the background color as needed */
+            color: white; /* Change the color as needed */
+        }
+    </style>
 </head>
 <body>
     <h1>Welcome to the Palancas KITA!</h1>
@@ -15,31 +49,57 @@
         <p>Thank you udah mengisi surat Palancanya, God bless!</p>
         <h2>Yok isi punya teman lain!</h2>
 
-        <div class="name-list">
-            <% passwordList.forEach(name => { %>
-                <a href="/<%= name %>"><%= name %></a><br>
-            <% }) %>
-        </div>
-    <% } else { %>
-        <form action="/submit-letter" method="post">
+
+    <% }%>
+    <h2>Mau isi punya siapa?</h2>
+    <h4>Name tag berwarna hijau, berarti sudah pernah diisi</h4>
+
+    <div class="name-list">
+        <% passwordList.forEach(name => { %>
+            <a href="javascript:void(0);" data-name="<%= name %>" onclick="fillRecipientAndScroll('<%= name %>')"><%= name %></a><br>
+        <% }) %>
+    </div>
+    <div class="form" id="form-section">
+        <form action="/submit-letter" method="post" onsubmit="updateSubmittedNames()">
             <label for="senderName">Nama kamu:</label>
             <input type="text" id="senderName" name="senderName" required>
             
             <label for="recipientName">Nama Penerima:</label>
-            <input type="text" id="recipientName" name="recipientName" <% if (!isEditable) { %> readonly <% } %> value="<%= dynamicRecipientName %>" required>
+            <input type="text" id="recipientName" name="recipientName" readonly required>
             
             <label for="letter">Tulis Suratmu disini:</label>
             <textarea id="letter" name="letter" rows="4" required></textarea>
             
             <button type="submit">Submit Letter</button>
         </form>
-        <h2>Yok isi punya teman lain!</h2>
-        <div class="name-list">
-            <% passwordList.forEach(name => { %>
-                <a href="/<%= name %>"><%= name %></a><br>
-            <% }) %>
-        </div>
-   
-    <% } %>
+    </div>
+    <script>
+        // Function to update submittedNames when the form is submitted
+        function updateSubmittedNames() {
+            var submittedNames = JSON.parse(localStorage.getItem('submittedNames')) || [];
+            var recipientName = document.getElementById('recipientName').value;
+
+            if (recipientName && !submittedNames.includes(recipientName)) {
+                submittedNames.push(recipientName);
+                localStorage.setItem('submittedNames', JSON.stringify(submittedNames));
+            }
+        }
+               // Function to update name colors based on submittedNames
+        function updateNameColors() {
+            var submittedNames = JSON.parse(localStorage.getItem('submittedNames')) || [];
+            var nameList = document.querySelectorAll('.name-list a');
+
+            nameList.forEach(function (nameElement) {
+                var name = nameElement.getAttribute('data-name');
+                if (submittedNames.includes(name)) {
+                    nameElement.classList.add('submitted');
+                }
+            });
+        }
+
+        // Call the function to update colors on page load
+        updateNameColors();
+    </script>
+    
 </body>
 </html>

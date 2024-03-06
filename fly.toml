@@ -9,8 +9,8 @@ primary_region = 'nrt'
 [build]
 
 [mounts]
-  source="myapp_data"
-  destination="/data"
+  source="kita"
+  destination="/kita"
 
 [http_service]
   internal_port = 3000
