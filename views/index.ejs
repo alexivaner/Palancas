@@ -52,7 +52,7 @@
 
     <% }%>
     <h2>Mau isi punya siapa?</h2>
-    <h4>Name tag berwarna hijau, berarti sudah pernah diisi</h4>
+    <h4>Name tag berwarna hijau, berarti kamu sudah pernah isi</h4>
 
     <div class="name-list">
         <% passwordList.forEach(name => { %>
@@ -64,27 +64,18 @@
             <label for="senderName">Nama kamu:</label>
             <input type="text" id="senderName" name="senderName" required>
             
-            <label for="recipientName">Nama Penerima:</label>
+            <label for="recipientName">Nama penerima:</label>
             <input type="text" id="recipientName" name="recipientName" readonly required>
             
-            <label for="letter">Tulis Suratmu disini:</label>
+            <label for="letter">Tulis suratmu disini:</label>
             <textarea id="letter" name="letter" rows="4" required></textarea>
             
-            <button type="submit">Submit Letter</button>
+            <button type="submit">Submit Surat</button>
         </form>
     </div>
     <script>
-        // Function to update submittedNames when the form is submitted
-        function updateSubmittedNames() {
-            var submittedNames = JSON.parse(localStorage.getItem('submittedNames')) || [];
-            var recipientName = document.getElementById('recipientName').value;
 
-            if (recipientName && !submittedNames.includes(recipientName)) {
-                submittedNames.push(recipientName);
-                localStorage.setItem('submittedNames', JSON.stringify(submittedNames));
-            }
-        }
-               // Function to update name colors based on submittedNames
+        // Function to update name colors based on submittedNames
         function updateNameColors() {
             var submittedNames = JSON.parse(localStorage.getItem('submittedNames')) || [];
             var nameList = document.querySelectorAll('.name-list a');
@@ -96,6 +87,17 @@
                 }
             });
         }
+        // Function to update submittedNames when the form is submitted
+        function updateSubmittedNames() {
+            var submittedNames = JSON.parse(localStorage.getItem('submittedNames')) || [];
+            var recipientName = document.getElementById('recipientName').value;
+
+            if (recipientName && !submittedNames.includes(recipientName)) {
+                submittedNames.push(recipientName);
+                localStorage.setItem('submittedNames', JSON.stringify(submittedNames));
+            }
+        }
+     
 
         // Call the function to update colors on page load
         updateNameColors();

@@ -20,7 +20,7 @@ app.use(session({ secret: 'your-secret-key', resave: true, saveUninitialized: tr
 app.set('view engine', 'ejs'); // Set EJS as the view engine
 
 
-const lettersFilePath = path.join(volumePath, 'letters.json');
+const lettersFilePath = path.join(volumePath, 'letters_rekol_prapaskah_2024.json');
 
 // Load letters from the JSON file on server start
 let letters = loadLetters();
@@ -89,32 +89,28 @@ function authenticateUser(username, password) {
     }
 }
 
-// Middleware to check if the user is authenticated
 function isAuthenticated(req, res, next) {
-    // Perform your authentication check here
-    // For example, you can check if the user is logged in based on a session or token
-    // If authenticated, call next(), otherwise redirect to the login page
-    // Example: Check if the user is authenticated based on a session variable
+    // Check if the user is authenticated based on a session variable
     if (req.session && req.session.isAuthenticated) {
-        return next();
+        // Check if the requested recipientName matches the authenticated user's recipientName
+        if (req.params.recipientName === req.session.recipientName) {
+            return next();
+        } else {
+            // Redirect to the login page if recipientName doesn't match
+            res.redirect('/login');
+        }
+    } else {
+        // Not authenticated, redirect to the login page
+        res.redirect('/login');
     }
-
-    // Not authenticated, redirect to the login page
-    res.redirect('/login');
 }
 
 app.get('/letters/:recipientName', isAuthenticated, (req, res) => {
     const recipientName = req.params.recipientName;
     const recipientLetters = loadLettersByRecipient(recipientName);
 
-    // Check if recipientName exists in passwords.json
-    if (passwords[recipientName]) {
-        // User is authenticated, render the letters
-        res.render('letters', { recipientName, letters: recipientLetters });
-    } else {
-        // No password protection for this recipient, render the letters
-        res.render('letters', { recipientName, letters: recipientLetters });
-    }
+    // User is authenticated, render the letters
+    res.render('letters', { recipientName, letters: recipientLetters });
 });
 
 app.get('/login', (req, res) => {
