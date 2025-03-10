@@ -20,7 +20,9 @@ app.use(session({ secret: 'your-secret-key', resave: true, saveUninitialized: tr
 app.set('view engine', 'ejs'); // Set EJS as the view engine
 
 
-const lettersFilePath = path.join(volumePath, 'letters_rekol_prapaskah_2024.json');
+// const lettersFilePath = path.join(volumePath, 'letters_rekol_prapaskah_2024.json');
+// const lettersFilePath = path.join('letters_rekol_prapaskah_2025.json');
+const lettersFilePath = path.join(volumePath, 'letters_rekol_prapaskah_2025.json');
 
 // Load letters from the JSON file on server start
 let letters = loadLetters();
